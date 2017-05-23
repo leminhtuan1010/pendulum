@@ -9,17 +9,32 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    var lac: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        anhconlac()
+        chaylac()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func anhconlac() {
+        lac = UIImageView(frame: CGRect(x: 180, y: 200, width: 50, height: 250))
+        lac.image = UIImage(named: "conlac")
+        lac.layer.anchorPoint = CGPoint(x: 0.5, y: 0)
+        lac.transform = self.lac.transform.rotated(by: CGFloat (-M_PI_4))
+        view.addSubview(lac)
+        
     }
-
+    func chaylac(){
+        UIView.animate(withDuration: 3, animations: {
+            self.lac.transform = self.lac.transform.rotated(by: CGFloat(M_PI_2))
+        }){_ in
+            UIView.animate(withDuration: 3, animations: {
+                self.lac.transform = self.lac.transform.rotated(by: CGFloat (-M_PI_2))
+            }) { _ in
+                self.chaylac()
+            }
+        }
+    }
+    
 
 }
 
